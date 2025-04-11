@@ -69,37 +69,72 @@ function simular() {
         if (opcion === 1) {
             console.clear();
             console.log("Lista de alumnos:");
-            alumnos.forEach(alumno => {
-                console.log(`Id : ${alumno.id}`);
-                console.log(`Nombre : ${alumno.nombre}`);
-                console.log(`Email : ${alumno.email}`);
-                console.log(`Edad : ${alumno.edad}`);
-                console.log(`Nota 1 : ${alumno.notas[0]}`);
-                console.log(`Nota 2 : ${alumno.notas[1]}`);
-                console.log(`Nota 3 : ${alumno.notas[2]}`);
-                console.log(`Promedio : ${alumno.promedio()}`);
+
+            // recorre el array
+            for (let i = 0; i < alumnos.length; i++) {// puede hacerse con un forEach
+                console.log(`Id : ${alumnos[i].id}`);
+                console.log(`Nombre : ${alumnos[i].nombre}`);
+                console.log(`Email : ${alumnos[i].email}`);
+                console.log(`Edad : ${alumnos[i].edad}`);
+                console.log(`Nota 1 : ${alumnos[i].notas[0]}`);
+                console.log(`Nota 2 : ${alumnos[i].notas[1]}`);
+                console.log(`Nota 3 : ${alumnos[i].notas[2]}`);
+                console.log(`Promedio : ${alumnos[i].promedio()}`);
                 console.log("------------------------");
-            });
+            }
 
         } else if (opcion === 2) {
             console.clear();
 
-            let nombre = prompt("Ingrese el nombre del alumno:");
-            let email = prompt("Ingrese el correo del alumno:");
-            let edad = Number(prompt("Ingrese la edad del alumno:"));
-            let nota1 = Number(prompt("Ingrese nota 1:"));
-            let nota2 = Number(prompt("Ingrese nota 2:"));
-            let nota3 = Number(prompt("Ingrese nota 3:"));
+            // Validación de nombre
+            let nombre;
+            do {
+                nombre = prompt("Ingrese el nombre del alumno:");
+                if (!nombre || nombre.trim() === "") {
+                    console.log("El nombre no puede estar vacío.");
+                }
+            } while (!nombre || nombre.trim() === "");
 
-            if (
-                !nombre || !email || isNaN(edad) || isNaN(nota1) || isNaN(nota2) || isNaN(nota3) ||
-                nota1 < 1 || nota1 > 7 ||
-                nota2 < 1 || nota2 > 7 ||
-                nota3 < 1 || nota3 > 7
-            ) {
-                console.log("Datos inválidos. Asegúrese de que las notas estén entre 1.0 y 7.0 y los campos no estén vacíos.");
-                continue;
-            }
+            // Validación de email
+            let email;
+            do {
+                email = prompt("Ingrese el email del alumno:");
+                if (!email || email.trim() === "") {
+                    console.log("El email no puede estar vacío.");
+                }
+            } while (!email || email.trim() === "");
+
+            // Validación de edad
+            let edad;
+            do {
+                edad = Number(prompt("Ingrese la edad del alumno (debe ser un número):"));
+                if (isNaN(edad) || edad <= 0) {
+                    console.log("Edad no válida. Debe ser un número positivo.");
+                }
+            } while (isNaN(edad) || edad <= 0);
+
+            // Validación de notas
+            let nota1, nota2, nota3;
+            do {
+                nota1 = Number(prompt("Ingrese nota 1 (debe ser entre 1.0 y 7.0):"));
+                if (isNaN(nota1) || nota1 < 1 || nota1 > 7) {
+                    console.log("Nota 1 no válida. Debe ser un número entre 1.0 y 7.0.");
+                }
+            } while (isNaN(nota1) || nota1 < 1 || nota1 > 7);
+
+            do {
+                nota2 = Number(prompt("Ingrese nota 2 (debe ser entre 1.0 y 7.0):"));
+                if (isNaN(nota2) || nota2 < 1 || nota2 > 7) {
+                    console.log("Nota 2 no válida. Debe ser un número entre 1.0 y 7.0.");
+                }
+            } while (isNaN(nota2) || nota2 < 1 || nota2 > 7);
+
+            do {
+                nota3 = Number(prompt("Ingrese nota 3 (debe ser entre 1.0 y 7.0):"));
+                if (isNaN(nota3) || nota3 < 1 || nota3 > 7) {
+                    console.log("Nota 3 no válida. Debe ser un número entre 1.0 y 7.0.");
+                }
+            } while (isNaN(nota3) || nota3 < 1 || nota3 > 7);
 
             ultimoId++;
             let nuevoAlumno = {
@@ -120,22 +155,55 @@ function simular() {
             let alumno = alumnos.find(a => a.id === idEditar);
 
             if (alumno) {
-                let nuevoNombre = prompt(`Nombre actual: ${alumno.nombre}\nNuevo nombre:`) || alumno.nombre;
-                let nuevoEmail = prompt(`Email actual: ${alumno.email}\nNuevo email:`) || alumno.email;
-                let nuevaEdad = Number(prompt(`Edad actual: ${alumno.edad}\nNueva edad:`));
-                let nuevaNota1 = Number(prompt(`Nota 1 actual: ${alumno.notas[0]}\nNueva nota 1:`));
-                let nuevaNota2 = Number(prompt(`Nota 2 actual: ${alumno.notas[1]}\nNueva nota 2:`));
-                let nuevaNota3 = Number(prompt(`Nota 3 actual: ${alumno.notas[2]}\nNueva nota 3:`));
+                // Edición de nombre
+                let nuevoNombre;
+                do {
+                    nuevoNombre = prompt(`Nombre actual: ${alumno.nombre}\nNuevo nombre:`);
+                    if (!nuevoNombre || nuevoNombre.trim() === "") {
+                        console.log("El nombre no puede estar vacío.");
+                    }
+                } while (!nuevoNombre || nuevoNombre.trim() === "");
 
-                if (
-                    isNaN(nuevaEdad) || isNaN(nuevaNota1) || isNaN(nuevaNota2) || isNaN(nuevaNota3) ||
-                    nuevaNota1 < 1 || nuevaNota1 > 7 ||
-                    nuevaNota2 < 1 || nuevaNota2 > 7 ||
-                    nuevaNota3 < 1 || nuevaNota3 > 7
-                ) {
-                    console.log("Edición cancelada. Verifica que edad y notas sean válidas.");
-                    continue;
-                }
+                // Edición de email
+                let nuevoEmail;
+                do {
+                    nuevoEmail = prompt(`Email actual: ${alumno.email}\nNuevo email:`);
+                    if (!nuevoEmail || nuevoEmail.trim() === "") {
+                        console.log("El email no puede estar vacío.");
+                    }
+                } while (!nuevoEmail || nuevoEmail.trim() === "");
+
+                // Edición de edad
+                let nuevaEdad;
+                do {
+                    nuevaEdad = Number(prompt(`Edad actual: ${alumno.edad}\nNueva edad:`));
+                    if (isNaN(nuevaEdad) || nuevaEdad <= 0) {
+                        console.log("Edad no válida. Debe ser un número positivo.");
+                    }
+                } while (isNaN(nuevaEdad) || nuevaEdad <= 0);
+
+                // Edición de notas
+                let nuevaNota1, nuevaNota2, nuevaNota3;
+                do {
+                    nuevaNota1 = Number(prompt(`Nota 1 actual: ${alumno.notas[0]}\nNueva nota 1:`));
+                    if (isNaN(nuevaNota1) || nuevaNota1 < 1 || nuevaNota1 > 7) {
+                        console.log("Nota 1 no válida. Debe ser un número entre 1.0 y 7.0.");
+                    }
+                } while (isNaN(nuevaNota1) || nuevaNota1 < 1 || nuevaNota1 > 7);
+
+                do {
+                    nuevaNota2 = Number(prompt(`Nota 2 actual: ${alumno.notas[1]}\nNueva nota 2:`));
+                    if (isNaN(nuevaNota2) || nuevaNota2 < 1 || nuevaNota2 > 7) {
+                        console.log("Nota 2 no válida. Debe ser un número entre 1.0 y 7.0.");
+                    }
+                } while (isNaN(nuevaNota2) || nuevaNota2 < 1 || nuevaNota2 > 7);
+
+                do {
+                    nuevaNota3 = Number(prompt(`Nota 3 actual: ${alumno.notas[2]}\nNueva nota 3:`));
+                    if (isNaN(nuevaNota3) || nuevaNota3 < 1 || nuevaNota3 > 7) {
+                        console.log("Nota 3 no válida. Debe ser un número entre 1.0 y 7.0.");
+                    }
+                } while (isNaN(nuevaNota3) || nuevaNota3 < 1 || nuevaNota3 > 7);
 
                 alumno.nombre = nuevoNombre;
                 alumno.email = nuevoEmail;
