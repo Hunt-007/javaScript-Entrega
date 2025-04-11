@@ -15,7 +15,8 @@ const funcProm = function () {
     let nota1 = this.notas[0];
     let nota2 = this.notas[1];
     let nota3 = this.notas[2];
-    let promedio = (nota1 + nota2 + nota3) / 3;
+    let suma = nota1 + nota2 + nota3;
+    let promedio = ( suma ) / 3;
     return `El alumno ${this.nombre} tiene el promedio ${promedio.toFixed(2)}`;
 };
 
@@ -65,6 +66,7 @@ function simular(){
     let opcion;
     // Mantine un ciclo eterno hasta el presionar 0
     while (opcion !== 0) {
+        console.clear();
         opcion = Number(prompt("Menú:\n1. Listar alumnos\n2. Agregar alumno\n3. Editar alumno\n4. Promedio General\n9. Limpiar Consola\n0. Salir"));
 
         if (opcion === 1) {

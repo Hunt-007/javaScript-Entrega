@@ -1,0 +1,51 @@
+.tituloH1{
+  text-align: center;
+}
+.tituloH2{
+  text-align: center;
+}
+.tituloH3{
+  text-align: center;
+}
+.seccionIntrucciones{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  
+}
+.capa{
+  border: thick double #32a1ce;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.botonSimular{
+  color: black;
+  text-align: center;
+  
+}
+.botonCentro{
+  display: flex;
+  justify-content: center;
+}
+
+span{
+  padding-left: 30px;
+}
+
+/*-------------------------------------------------*/
+/*boton*/
+.btn {
+  font-weight: bold;
+  background-color: #FF7800;
+  color: white;
+  border: 1px solid #FF7800;
+}
+
+.btn:hover {
+  font-weight: bold;
+  background-color: rgba(211, 105, 13, 0.9254901961);
+  color: white;
+}
