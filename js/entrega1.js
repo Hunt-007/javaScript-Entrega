@@ -37,7 +37,7 @@ let alumnos = [
         email: "alessandro.baeza@gmail.com",
         edad: 39,
         estaRegistrado: true,
-        notas: [7, 6.5, 5, 5],
+        notas: [7, 6.5, 5.5],
         promedio: funcProm
     },
     {
@@ -66,8 +66,8 @@ function simular(){
     let opcion;
     // Mantine un ciclo eterno hasta el presionar 0
     while (opcion !== 0) {
-        console.clear();
-        opcion = Number(prompt("Menú:\n1. Listar alumnos\n2. Agregar alumno\n3. Editar alumno\n4. Promedio General\n9. Limpiar Consola\n0. Salir"));
+        
+        opcion = Number(prompt("Menú:\n1. Listar alumnos\n2. Agregar alumno\n3. Editar alumno\n4. Eliminar alumno\n5. Promedio General\n9. Limpiar Consola\n0. Salir"));
 
         if (opcion === 1) {
             console.log("Lista de alumnos:");
@@ -116,7 +116,22 @@ function simular(){
                 } else {
                     console.log("No se encontró un alumno con ese ID.");
                 }
-        }else if (opcion === 4) {
+        } else if (opcion === 4) {
+                let idEliminar = Number(prompt("Ingrese el ID del alumno que desea eliminar:"));
+                let index = alumnos.findIndex(a => a.id === idEliminar);
+            
+                if (index !== -1) {
+                    let confirmacion = confirm(`¿Estás seguro que deseas eliminar a ${alumnos[index].nombre}?`);
+                    if (confirmacion) {
+                        alumnos.splice(index, 1);
+                        console.log("Alumno eliminado correctamente.");
+                    } else {
+                        console.log("Operación cancelada.");
+                    }
+                } else {
+                    console.log("No se encontró un alumno con ese ID.");
+                }
+        }else if (opcion === 5) {
             console.log(`Promedio General: ${funcPromGeneral()}`);
         }else if (opcion === 9) {
             console.clear();
