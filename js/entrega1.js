@@ -8,7 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Función promedio individual
 const funcProm = function () {
-    let [nota1, nota2, nota3] = this.notas;
+    
+    let nota1 = this.notas[0];
+    let nota2 = this.notas[1];
+    let nota3 = this.notas[2];
+
     let suma = nota1 + nota2 + nota3;
     let promedio = suma / 3;
     return `El alumno ${this.nombre} tiene el promedio ${promedio.toFixed(2)}`;
@@ -17,8 +21,9 @@ const funcProm = function () {
 // Función promedio general
 const funcPromGeneral = function () {
     let sumaTotal = 0;
-    for (let i = 0; i < alumnos.length; i++) {
-        let promedio = (alumnos[i].notas[0] + alumnos[i].notas[1] + alumnos[i].notas[2]) / 3;
+    for (let i = 0; i < alumnos.length; i++) {// puede hacerse con un forEach
+        let suma = alumnos[i].notas[0] + alumnos[i].notas[1] + alumnos[i].notas[2];
+        let promedio = suma / 3;
         sumaTotal += promedio;
     }
     return (sumaTotal / alumnos.length).toFixed(2);
@@ -89,7 +94,7 @@ function simular() {
             // Validación de nombre
             let nombre;
             do {
-                nombre = prompt("Ingrese el nombre del alumno:");
+                nombre = prompt("Ingrese el nombre del alumno (no puede estar vacío):");
                 if (!nombre || nombre.trim() === "") {
                     console.log("El nombre no puede estar vacío.");
                 }
@@ -98,7 +103,7 @@ function simular() {
             // Validación de email
             let email;
             do {
-                email = prompt("Ingrese el email del alumno:");
+                email = prompt("Ingrese el email del alumno (no puede estar vacío):");
                 if (!email || email.trim() === "") {
                     console.log("El email no puede estar vacío.");
                 }
@@ -158,7 +163,7 @@ function simular() {
                 // Edición de nombre
                 let nuevoNombre;
                 do {
-                    nuevoNombre = prompt(`Nombre actual: ${alumno.nombre}\nNuevo nombre:`);
+                    nuevoNombre = prompt(`Nombre actual: ${alumno.nombre}\nNuevo nombre (no puede estar vacío):`);
                     if (!nuevoNombre || nuevoNombre.trim() === "") {
                         console.log("El nombre no puede estar vacío.");
                     }
@@ -167,7 +172,7 @@ function simular() {
                 // Edición de email
                 let nuevoEmail;
                 do {
-                    nuevoEmail = prompt(`Email actual: ${alumno.email}\nNuevo email:`);
+                    nuevoEmail = prompt(`Email actual: ${alumno.email}\nNuevo email (no puede estar vacío):`);
                     if (!nuevoEmail || nuevoEmail.trim() === "") {
                         console.log("El email no puede estar vacío.");
                     }
@@ -176,7 +181,7 @@ function simular() {
                 // Edición de edad
                 let nuevaEdad;
                 do {
-                    nuevaEdad = Number(prompt(`Edad actual: ${alumno.edad}\nNueva edad:`));
+                    nuevaEdad = Number(prompt(`Edad actual: ${alumno.edad}\nNueva edad (debe ser un número):`));
                     if (isNaN(nuevaEdad) || nuevaEdad <= 0) {
                         console.log("Edad no válida. Debe ser un número positivo.");
                     }
@@ -185,21 +190,21 @@ function simular() {
                 // Edición de notas
                 let nuevaNota1, nuevaNota2, nuevaNota3;
                 do {
-                    nuevaNota1 = Number(prompt(`Nota 1 actual: ${alumno.notas[0]}\nNueva nota 1:`));
+                    nuevaNota1 = Number(prompt(`Nota 1 actual: ${alumno.notas[0]}\nNueva nota 1 (debe ser entre 1.0 y 7.0):`));
                     if (isNaN(nuevaNota1) || nuevaNota1 < 1 || nuevaNota1 > 7) {
                         console.log("Nota 1 no válida. Debe ser un número entre 1.0 y 7.0.");
                     }
                 } while (isNaN(nuevaNota1) || nuevaNota1 < 1 || nuevaNota1 > 7);
 
                 do {
-                    nuevaNota2 = Number(prompt(`Nota 2 actual: ${alumno.notas[1]}\nNueva nota 2:`));
+                    nuevaNota2 = Number(prompt(`Nota 2 actual: ${alumno.notas[1]}\nNueva nota 2 (debe ser entre 1.0 y 7.0):`));
                     if (isNaN(nuevaNota2) || nuevaNota2 < 1 || nuevaNota2 > 7) {
                         console.log("Nota 2 no válida. Debe ser un número entre 1.0 y 7.0.");
                     }
                 } while (isNaN(nuevaNota2) || nuevaNota2 < 1 || nuevaNota2 > 7);
 
                 do {
-                    nuevaNota3 = Number(prompt(`Nota 3 actual: ${alumno.notas[2]}\nNueva nota 3:`));
+                    nuevaNota3 = Number(prompt(`Nota 3 actual: ${alumno.notas[2]}\nNueva nota 3 (debe ser entre 1.0 y 7.0):`));
                     if (isNaN(nuevaNota3) || nuevaNota3 < 1 || nuevaNota3 > 7) {
                         console.log("Nota 3 no válida. Debe ser un número entre 1.0 y 7.0.");
                     }
