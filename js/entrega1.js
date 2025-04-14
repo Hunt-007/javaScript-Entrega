@@ -62,7 +62,7 @@ let alumnos = [
 
 // Contador de ID para nuevos alumnos
 
-//alumnos.length > 0: Verifica si el array alumnos.
+//alumnos.length > 0: Verifica cantidad en el array alumnos.
 //alumnos.map((a) => a.id): Crea un array con solo los id de cada alumno.
 //Math.max(...alumnos.map(...)): Usa el operador spread ... para pasar los id como argumentos a Math.max, obteniendo el mayor.
 //Si el arreglo está vacío, retorna 0.
