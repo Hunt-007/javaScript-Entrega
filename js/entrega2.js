@@ -53,6 +53,7 @@ let cursoEditandoId = null;
 let ultimoIdAlumno = Math.max(...alumnos.map((a) => a.id), 0);
 let ultimoIdCurso = Math.max(...cursos.map((c) => c.id), 0);
 
+//Importante: localStorage solo guarda texto, por eso se convierte con JSON.stringify al guardar y con JSON.parse al leer.
 // Guardar en localStorage
 function guardarDatos() {
   localStorage.setItem("cursos", JSON.stringify(cursos));
@@ -125,7 +126,7 @@ function cargarListaAlumnos() {
 
   // Recorrer los alumnos filtrados y crear elementos <li> para mostrarlos
   alumnosFiltrados.forEach((a) => {
-    const curso = cursos.find((c) => c.id === a.cursoId); // Buscar el nombre del curso
+    const curso = cursos.find((c) => c.id === a.cursoId); // Buscar el id del curso
 
     const li = document.createElement("li");
     li.className =
@@ -185,9 +186,9 @@ function editarCurso(id) {
 
 // Eliminar curso y alumnos del curso
 function eliminarCurso(id) {
-  cursos = cursos.filter((c) => c.id !== id);
-  alumnos = alumnos.filter((a) => a.cursoId !== id);
-  guardarDatos();
+  cursos = cursos.filter((c) => c.id !== id); //crear un nuevo array de cursos sin el alumno cuyo id coincide
+  alumnos = alumnos.filter((a) => a.cursoId !== id); //crear un nuevo array de alumnos sin el alumno cuyo id coincide
+  guardarDatos(); //guarda array en localstorage
   cargarCursos();
   cargarListaCursos();
   cargarListaAlumnos();
@@ -202,6 +203,7 @@ document
     const rut = document.getElementById("rutAlumno").value.trim();
     const email = document.getElementById("emailAlumno").value.trim();
     if (!alumnoEditandoId && alumnos.some((a) => a.rut === rut)) {
+      //verifica en boolean si el rut  existe
       return mostrarMensaje("El RUT ya existe.", "danger");
     }
     if (!email.includes("@")) {
@@ -225,7 +227,7 @@ document
     };
 
     if (alumnoEditandoId) {
-      const alumno = alumnos.find((a) => a.id === alumnoEditandoId);
+      const alumno = alumnos.find((a) => a.id === alumnoEditandoId); //busca por id
       alumno.actualizar(datos);
       alumnoEditandoId = null;
       document.getElementById("btnAlumno").textContent = "Agregar Alumno";
@@ -280,27 +282,27 @@ document.addEventListener("DOMContentLoaded", () => {
     alumnos = [
       new Alumno(
         ++ultimoIdAlumno,
-        "Ana Pérez",
+        "Alessandro Baeza",
         "11111111-1",
-        "ana@mail.com",
+        "abaeza@mail.com",
         16,
         cursos[0].id,
         ["6.0", "6.5", "7.0"]
       ),
       new Alumno(
         ++ultimoIdAlumno,
-        "Carlos Soto",
+        "Juan Arroyo",
         "22222222-2",
-        "carlos@mail.com",
+        "jarroyo@mail.com",
         17,
         cursos[1].id,
         ["5.5", "5.8", "6.2"]
       ),
       new Alumno(
         ++ultimoIdAlumno,
-        "María Díaz",
+        "Jorge Oviedo",
         "33333333-3",
-        "maria@mail.com",
+        "joviedo@mail.com",
         15,
         cursos[2].id,
         ["6.7", "6.9", "7.0"]
