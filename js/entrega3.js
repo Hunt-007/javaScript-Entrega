@@ -1,6 +1,20 @@
 
+    //conceptos aplicados
+    /* 
+    1- Promesas: fetch(...).then(...).then(...) para consumir API externa.
+    2- Arrays: allProducts, cart, .forEach(), .filter(), .find(), .reduce().
+    3- Objetos: Productos y carrito tienen estructura { id, title, price, qty }. qty se agrega para el conteo en carrito
+    4- Funciones: Reutilizadas para filtrar, mostrar produtos 
+                agregar, eliminar, y simular el pago en el carrito
+    5- DOM: se utiliza createElement, innerHTML, appendChild, addEventListener.
+    6- localStorage: mantiene el carrito en el navegador.
+    7- alertas de agregar, eliminar y pagar son realizadas por un div ubicado en la pagina principal que pueden eliminar manualmente o se elimina 3 segundos 
+    8- no se utiliza alert , prompt y console.log()
+    */
+
+
       // Constantes del DOM
-      const API_BASE = "https://fakestoreapi.com";
+      const API_BASE = "https://fakestoreapi.com";//devuelve productos en formato JSON
       const productContainer = document.getElementById("product-container");
       const categorySelect = document.getElementById("categorySelect");
       const searchInput = document.getElementById("searchInput");
@@ -10,8 +24,8 @@
       const buyerName = document.getElementById("buyerName");
       const buyerEmail = document.getElementById("buyerEmail");
 
-      // Variables principales
-      let allProducts = []; // Array de productos
+      // Variables principales Array de objetos
+      let allProducts = []; // Array de productos de API
       let cart = JSON.parse(localStorage.getItem("cart")) || []; // Array de objetos en carrito
 
       // Promesa: Obtener categorías y poblar el select
@@ -78,7 +92,7 @@
         if (found) {
           found.qty++;
         } else {
-          cart.push({ ...product, qty: 1 }); // objeto nuevo con propiedad qty
+          cart.push({ ...product, qty: 1 }); // objeto nuevo con propiedad qty (para la cantidad inicial del producto en el carrito)
         }
         saveCart();
         showAlert('<i class="bi bi-check-circle-fill"></i> Producto agregado al carrito', "success", product);
@@ -187,7 +201,7 @@
           alert.classList.remove("show");
           alert.classList.add("fade");
           setTimeout(() => alert.remove(), 300);
-        }, 4000);
+        }, 3000);
       }
 
       // Inicializar carrito al cargar
